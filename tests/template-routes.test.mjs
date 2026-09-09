@@ -72,6 +72,7 @@ test('brand positions remain legible and footer punctuation is normalized', () =
   assert.match(header, />YIDIANYUAN</)
   assert.match(footer, /legalOwner/)
   assert.doesNotMatch(footer, /\{company\.legalName\}\. All rights reserved/)
+  assert.equal(existsSync(new URL('public/icon.svg', root)), true, 'admin proxy favicon fallback must be branded')
 })
 
 test('approved motion plan is represented by three component-level motion scenes', () => {
