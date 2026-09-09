@@ -1,0 +1,9 @@
+'use client'
+import { Suspense, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+
+function LoginForm() {
+  const params = useSearchParams(); const [pending, setPending] = useState(false)
+  return <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#f7f2e7] to-[#ece3cd] p-4"><div className="w-full max-w-md rounded-xl border border-slate-200 bg-white p-8 shadow-lg"><div className="mb-6 text-center"><h1 className="text-2xl font-bold text-slate-900">YIDIANYUAN</h1><p className="mt-2 text-sm text-slate-500">Website management login</p></div>{params.get('reason') === 'unauthorized' && <p className="mb-4 rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-700">Please sign in to continue.</p>}<form action="/api/auth/login" method="post" className="space-y-4" onSubmit={() => setPending(true)}>{params.get('error') && <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">{params.get('error')}</p>}<label className="block text-sm font-medium text-slate-700">Email<input name="email" type="email" autoComplete="email" required className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900" /></label><label className="block text-sm font-medium text-slate-700">Password<input name="password" type="password" autoComplete="current-password" required className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900" /></label><button type="submit" disabled={pending} className="w-full rounded-lg bg-[#1e4a34] px-4 py-2.5 text-sm font-semibold text-white disabled:opacity-60">{pending ? 'Signing in…' : 'Sign in'}</button></form></div></main>
+}
+export default function AdminLoginPage() { return <Suspense fallback={<div className="flex min-h-screen items-center justify-center">Loading…</div>}><LoginForm /></Suspense> }
