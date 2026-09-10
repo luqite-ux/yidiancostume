@@ -96,4 +96,4 @@ No third-party branding, assets, copy, page structure, or restricted example cod
 
 Status before v0 generation: desktop-ready `PASS`; 390px-ready `PASS`; reduced-motion design `PASS`.
 
-Production verification status: pending the 2026-09-10 Logo and full-homepage motion release.
+Production verification status: `PASS` on 2026-09-10 at `https://yidiancostume.com`. All nine homepage sections were exercised in a real browser at 1440px and 390px; no horizontal overflow or console errors were observed. Reduced-motion settled to `opacity: 1; transform: none`, and a JavaScript-disabled 390px browser returned HTTP 200 with all nine sections and core content visible.
