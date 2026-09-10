@@ -22,17 +22,13 @@ export function SiteHeader() {
           aria-label="YIDIANYUAN home"
         >
           <Image
-            src="/images/logo.jpg"
+            src="/images/logo-transparent.png"
             alt="YIDIANYUAN logo"
-            width={160}
-            height={64}
-            className="h-12 w-12 object-contain"
+            width={525}
+            height={180}
+            className="h-auto w-[150px] object-contain sm:w-[188px] lg:w-[205px]"
             priority
           />
-          <span className="hidden leading-none sm:block">
-            <strong className="block font-serif text-lg tracking-[0.08em] text-primary">YIDIANYUAN</strong>
-            <span className="mt-1 block text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Specialty apparel manufacturing</span>
-          </span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

@@ -69,7 +69,7 @@ test('hero removes inactive slides from focus order and gives slide tabs usable 
 test('brand positions remain legible and footer punctuation is normalized', () => {
   const header = readFileSync(new URL('components/site-header.tsx', root), 'utf8')
   const footer = readFileSync(new URL('components/site-footer.tsx', root), 'utf8')
-  assert.match(header, />YIDIANYUAN</)
+  assert.match(header, /alt="YIDIANYUAN logo"/)
   assert.match(footer, /legalOwner/)
   assert.doesNotMatch(footer, /\{company\.legalName\}\. All rights reserved/)
   assert.equal(existsSync(new URL('public/icon.svg', root)), true, 'admin proxy favicon fallback must be branded')
@@ -82,7 +82,7 @@ test('approved motion plan is represented by three component-level motion scenes
     'components/product-card.tsx',
   ].map((file) => readFileSync(new URL(file, root), 'utf8')).join('\n')
   assert.ok((sources.match(/motion\/react/g) ?? []).length >= 3)
-  assert.doesNotMatch(sources, /initial=\{[^\n]*opacity:\s*0/)
+  assert.doesNotMatch(sources, /initial=\{[^\n]*opacity:\s*0(?:[,\s}]|$)/)
 })
 
 test('category cards keep product imagery unobscured by separating image and copy', () => {
@@ -91,4 +91,47 @@ test('category cards keep product imagery unobscured by separating image and cop
   assert.match(source, /data-category-image/)
   assert.match(source, /object-contain/)
   assert.match(source, /data-category-content/)
+})
+
+test('header and footer use the complete transparent official logo without duplicate wordmarks', () => {
+  const header = readFileSync(new URL('components/site-header.tsx', root), 'utf8')
+  const footer = readFileSync(new URL('components/site-footer.tsx', root), 'utf8')
+  const layout = readFileSync(new URL('app/layout.tsx', root), 'utf8')
+
+  assert.equal(existsSync(new URL('public/images/logo-transparent.png', root)), true)
+  assert.equal(existsSync(new URL('public/images/logo.jpg', root)), false, 'obsolete white-canvas logo must be removed')
+  assert.match(header, /src="\/images\/logo-transparent\.png"/)
+  assert.doesNotMatch(header, /<strong[^>]*>YIDIANYUAN<\/strong>/)
+  assert.doesNotMatch(header, /Specialty apparel manufacturing/)
+  assert.match(footer, /src="\/images\/logo-transparent\.png"/)
+  assert.doesNotMatch(footer, /bg-background p-3/)
+  assert.doesNotMatch(footer, /font-serif text-base tracking-\[0\.08em\].*YIDIANYUAN/)
+  assert.match(layout, /logo: 'https:\/\/yidiancostume\.com\/images\/logo-transparent\.png'/)
+})
+
+test('every homepage section has perceptible progressive-enhancement motion', () => {
+  const sections = {
+    'components/home/hero-slider.tsx': 'hero',
+    'components/home/category-grid.tsx': 'categories',
+    'components/home/featured-products.tsx': 'featured-products',
+    'components/home/oem-process-section.tsx': 'oem-process',
+    'components/home/manufacturing-facts-section.tsx': 'manufacturing',
+    'components/home/quality-control-section.tsx': 'quality-control',
+    'components/home/applications-section.tsx': 'applications',
+    'components/home/faq-preview-section.tsx': 'faq',
+    'app/page.tsx': 'news',
+  }
+
+  for (const [file, id] of Object.entries(sections)) {
+    const source = readFileSync(new URL(file, root), 'utf8')
+    assert.match(source, new RegExp(`data-motion-section="${id}"`), `${file} must identify its motion scene`)
+    assert.match(source, /MotionReveal|motion\./, `${file} must implement visible motion`)
+  }
+
+  const reveal = readFileSync(new URL('components/motion/motion-reveal.tsx', root), 'utf8')
+  assert.match(reveal, /useReducedMotion/)
+  assert.match(reveal, /whileInView/)
+  assert.match(reveal, /once:\s*true/)
+  assert.doesNotMatch(reveal, /opacity:\s*0(?:[,\s}]|$)/)
+  assert.match(readFileSync(new URL('components/product-card.tsx', root), 'utf8'), /whileInView/)
 })

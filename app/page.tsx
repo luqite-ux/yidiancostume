@@ -8,6 +8,7 @@ import { OemProcessSection } from '@/components/home/oem-process-section'
 import { QualityControlSection } from '@/components/home/quality-control-section'
 import { NewsEmptyState } from '@/components/news-empty-state'
 import { SiteShell } from '@/components/site-shell'
+import { MotionReveal } from '@/components/motion/motion-reveal'
 import { getPublishedArticles } from '@/lib/articles-db'
 import { getCategories, getProducts } from '@/lib/products-db'
 
@@ -25,13 +26,32 @@ export default async function HomePage() {
       <QualityControlSection />
       <ApplicationsSection />
       <FaqPreviewSection />
-      <section className="fabric-texture bg-secondary py-20 sm:py-28" aria-labelledby="news-heading">
+      <section data-motion-section="news" className="fabric-texture bg-secondary py-20 sm:py-28" aria-labelledby="news-heading">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[#7a521b]">News</p>
-          <h2 id="news-heading" className="mt-3 text-center font-serif text-3xl text-foreground sm:text-4xl">
-            Updates from YIDIANYUAN
-          </h2>
-          <div className="mt-10">{articles.length ? <div className="grid gap-4 sm:grid-cols-3">{articles.slice(0, 3).map((article) => <a key={article.slug} href={`/news/${article.slug}`} className="rounded-sm border border-border bg-card p-5"><time className="text-xs text-muted-foreground">{article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('en-US') : ''}</time><h3 className="mt-2 font-serif text-lg">{article.title}</h3></a>)}</div> : <NewsEmptyState />}</div>
+          <MotionReveal direction="scale">
+            <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[#7a521b]">News</p>
+            <h2 id="news-heading" className="mt-3 text-center font-serif text-3xl text-foreground sm:text-4xl">
+              Updates from YIDIANYUAN
+            </h2>
+          </MotionReveal>
+          <div className="mt-10">
+            {articles.length ? (
+              <div className="grid gap-4 sm:grid-cols-3">
+                {articles.slice(0, 3).map((article, index) => (
+                  <MotionReveal key={article.slug} delay={index * 0.09} className="h-full">
+                    <a href={`/news/${article.slug}`} className="flex h-full flex-col rounded-sm border border-border bg-card p-5 transition-shadow hover:shadow-md">
+                      <time className="text-xs text-muted-foreground">{article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('en-US') : ''}</time>
+                      <h3 className="mt-2 font-serif text-lg">{article.title}</h3>
+                    </a>
+                  </MotionReveal>
+                ))}
+              </div>
+            ) : (
+              <MotionReveal>
+                <NewsEmptyState />
+              </MotionReveal>
+            )}
+          </div>
         </div>
       </section>
     </SiteShell>

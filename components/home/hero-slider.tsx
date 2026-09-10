@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
+import { motion } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -114,6 +115,7 @@ export function HeroSlider() {
 
   return (
     <section
+      data-motion-section="hero"
       aria-roledescription="carousel"
       aria-label="Featured highlights"
       className="relative h-[560px] w-full overflow-hidden sm:h-[620px] lg:h-[680px]"
@@ -154,7 +156,12 @@ export function HeroSlider() {
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/55 to-primary/5 sm:bg-gradient-to-r sm:from-primary/85 sm:via-primary/30 sm:to-primary/5" />
 
           <div className={cn('relative mx-auto flex h-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8', slide.contentPositionMobile, slide.contentPositionDesktop)}>
-            <div className={cn('max-w-xl rounded-sm bg-primary/45 p-5 text-primary-foreground backdrop-blur-[2px] sm:bg-transparent sm:p-0 sm:backdrop-blur-none', slide.textAlignmentDesktop)}>
+            <motion.div
+              initial={false}
+              animate={reducedMotion ? { opacity: 1, y: 0 } : i === index ? { opacity: 1, y: 0 } : { opacity: 0.9, y: 0 }}
+              transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+              className={cn('max-w-xl rounded-sm bg-primary/45 p-5 text-primary-foreground backdrop-blur-[2px] sm:bg-transparent sm:p-0 sm:backdrop-blur-none', slide.textAlignmentDesktop)}
+            >
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#f2c979]">
                 {slide.eyebrow}
               </p>
@@ -180,7 +187,7 @@ export function HeroSlider() {
               {slide.imageNote && (
                 <p className="mt-4 hidden text-xs text-primary-foreground/70 sm:block">{slide.imageNote}</p>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       })}

@@ -4,14 +4,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
+import { MotionReveal } from '@/components/motion/motion-reveal'
 import { getLocalized, type ProductCategory } from '@/lib/types'
 
 export function CategoryGrid({ categories }: { categories: ProductCategory[] }) {
   const reduceMotion = useReducedMotion()
   return (
-    <section aria-labelledby="categories-heading" className="bg-background py-20 sm:py-28">
+    <section data-motion-section="categories" aria-labelledby="categories-heading" className="bg-background py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
+        <MotionReveal className="max-w-2xl" direction="left">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7a521b]">Product lines</p>
           <h2 id="categories-heading" className="mt-3 font-serif text-3xl text-foreground sm:text-4xl">
             Built for three distinct programs
@@ -20,15 +21,18 @@ export function CategoryGrid({ categories }: { categories: ProductCategory[] }) 
             Each category is produced on the same sewing lines, with OEM/ODM customization
             available across all three.
           </p>
-        </div>
+        </MotionReveal>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <motion.div
               key={category.slug}
-              initial={false}
+              initial={reduceMotion ? false : { opacity: 0.88, y: 22 }}
+              animate={reduceMotion ? { opacity: 1, y: 0 } : undefined}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
               whileHover={reduceMotion ? undefined : { y: -6 }}
-              transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+              transition={{ duration: 0.56, delay: Math.min(index * 0.09, 0.24), ease: [0.22, 1, 0.36, 1] }}
               className="h-full"
             >
               <Link href={`/products?category=${category.slug}`} className="group flex h-full flex-col overflow-hidden rounded-sm border border-border bg-card shadow-[0_14px_40px_rgba(30,74,52,0.08)] transition-shadow hover:shadow-[0_18px_48px_rgba(30,74,52,0.14)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">

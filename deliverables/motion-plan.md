@@ -11,6 +11,20 @@ Goal: make the site feel editorial and theatrical while keeping product evaluati
 - The recent ledger combinations rely heavily on industrial signal paths, aperture reveals, product rails, or shallow factory parallax. This plan does not reuse those complete combinations.
 - Basic one-time in-view/card coverage remains a usability mechanism, but the identifying motion is a stage-curtain hero transition and shared-layout product filtering.
 
+## Foreign-trade case-library reference
+
+The owner requested a fresh case-library lookup on 2026-09-10. Two apparel/manufacturing searches returned zero matching rows, so the implementation reuses the three previously validated apparel references already recorded in `.codex-delivery/case-reference.md`:
+
+- Tahui Sweater Factory — https://www.tahui-factory.cn/ — borrow only its clear factory-to-product information rhythm.
+- Binhar — https://www.binhar.com/ — borrow only its category hierarchy and buyer-path pacing.
+- COMMTEX — https://www.gocommtex.com/ — borrow only its restrained manufacturing storytelling.
+
+No customer facts, images, copy, page structure, branding, or code are copied from these references.
+
+## Owner-directed full-homepage coverage
+
+The final implementation expands the four authored scenes across every homepage section: Hero, category lines, featured products, OEM/ODM process, manufacturing facts, quality control, buyer applications, FAQ, and News. Section headings, repeated cards, manufacturing media, and the primary process CTA enter in bounded reading order; the Hero remains the focal authored sequence. The implementation keeps content partially visible before enhancement, runs once per viewport, caps stagger, and removes spatial movement when `prefers-reduced-motion` is enabled.
+
 ## External candidates and scoring
 
 Score: 1 (poor) to 5 (strong). Total is out of 35 across industry fit, hierarchy, conversion help, recent differentiation, desktop, 390px, performance/reduced-motion.
@@ -82,3 +96,4 @@ No third-party branding, assets, copy, page structure, or restricted example cod
 
 Status before v0 generation: desktop-ready `PASS`; 390px-ready `PASS`; reduced-motion design `PASS`.
 
+Production verification status: pending the 2026-09-10 Logo and full-homepage motion release.
