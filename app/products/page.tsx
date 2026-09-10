@@ -8,6 +8,8 @@ import { getLocalized } from '@/lib/types'
 export const metadata: Metadata = {
   title: 'Wholesale Costume & Specialty Apparel Products',
   description: 'Explore representative stage costumes, porch goose outfits, and pet clothes available for OEM/ODM wholesale programs.',
+  alternates: { canonical: '/products' },
+  openGraph: { type: 'website', url: '/products', images: ['/images/banner-1.jpg'] },
 }
 
 export const revalidate = 60

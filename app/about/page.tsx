@@ -4,7 +4,12 @@ import { ArrowRight, Layers3, Scissors, UsersRound } from 'lucide-react'
 import { InnerPageHero } from '@/components/inner-page-hero'
 import { SiteShell } from '@/components/site-shell'
 
-export const metadata: Metadata = { title: 'About Our Garment Factory', description: 'Learn about Shantou Yidianyuan Garment Industry Co., Ltd. and its three specialty apparel product lines.' }
+export const metadata: Metadata = {
+  title: 'About Our Garment Factory',
+  description: 'Learn about Shantou Yidianyuan Garment Industry Co., Ltd. and its three specialty apparel product lines.',
+  alternates: { canonical: '/about' },
+  openGraph: { type: 'website', url: '/about', images: ['/images/banner-1.jpg'] },
+}
 const facts = [{ icon: Layers3, title: 'Three confirmed product lines' }, { icon: Scissors, title: 'OEM/ODM sample development' }, { icon: UsersRound, title: 'Wholesale-buyer focus' }]
 
 export default function AboutPage() {

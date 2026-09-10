@@ -6,7 +6,12 @@ import { ManufacturingFactsSection } from '@/components/home/manufacturing-facts
 import { QualityControlSection } from '@/components/home/quality-control-section'
 import { SiteShell } from '@/components/site-shell'
 
-export const metadata: Metadata = { title: 'Garment Manufacturing', description: 'See YIDIANYUAN production facts, sewing lines, cutting capability, inspection checkpoints, and supplied facility photography.' }
+export const metadata: Metadata = {
+  title: 'Garment Manufacturing',
+  description: 'See YIDIANYUAN production facts, sewing lines, cutting capability, inspection checkpoints, and supplied facility photography.',
+  alternates: { canonical: '/manufacturing' },
+  openGraph: { type: 'website', url: '/manufacturing', images: ['/images/factory-latest-clean.png'] },
+}
 const capabilities = [
   { icon: Factory, title: 'Two workshops', body: 'Approximately 800 m² of supplied production space.' },
   { icon: Shirt, title: 'Five sewing lines', body: 'Multiple lines support stage, novelty and pet apparel programs.' },

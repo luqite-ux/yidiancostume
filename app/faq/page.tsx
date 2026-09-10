@@ -5,7 +5,12 @@ import { SiteShell } from '@/components/site-shell'
 import { faqItems } from '@/lib/site-data'
 import { getLocalized } from '@/lib/types'
 
-export const metadata: Metadata = { title: 'Wholesale Buyer FAQ', description: 'Answers about MOQ, OEM/ODM samples, production lead times, customization, inspection and requesting a quote.' }
+export const metadata: Metadata = {
+  title: 'Wholesale Buyer FAQ',
+  description: 'Answers about MOQ, OEM/ODM samples, production lead times, customization, inspection and requesting a quote.',
+  alternates: { canonical: '/faq' },
+  openGraph: { type: 'website', url: '/faq', images: ['/images/banner-1.jpg'] },
+}
 
 export default function FaqPage() {
   const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqItems.map((item) => ({ '@type': 'Question', name: getLocalized(item.question), acceptedAnswer: { '@type': 'Answer', text: getLocalized(item.answer) } })) }

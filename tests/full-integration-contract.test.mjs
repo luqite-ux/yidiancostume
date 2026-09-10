@@ -57,3 +57,21 @@ test('technical SEO covers robots, dynamic sitemap, canonical host, and page sch
   assert.doesNotMatch(read('app/layout.tsx'), /generator:\s*'v0\.app'/)
   assert.match(read('app/layout.tsx'), /process\.env\.VERCEL_ENV === 'production'/)
 })
+
+test('every indexable static inner page declares its own canonical and Open Graph URL', () => {
+  const routes = {
+    'app/about/page.tsx': '/about',
+    'app/contact/page.tsx': '/contact',
+    'app/faq/page.tsx': '/faq',
+    'app/manufacturing/page.tsx': '/manufacturing',
+    'app/news/page.tsx': '/news',
+    'app/oem-odm/page.tsx': '/oem-odm',
+    'app/products/page.tsx': '/products',
+  }
+
+  for (const [file, route] of Object.entries(routes)) {
+    const source = read(file)
+    assert.match(source, new RegExp(`canonical:\\s*['\"]${route}['\"]`), `${file} must use its own canonical`)
+    assert.match(source, new RegExp(`url:\\s*['\"]${route}['\"]`), `${file} must use its own Open Graph URL`)
+  }
+})

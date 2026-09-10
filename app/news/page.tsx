@@ -4,7 +4,12 @@ import { NewsEmptyState } from '@/components/news-empty-state'
 import { SiteShell } from '@/components/site-shell'
 import { getPublishedArticles } from '@/lib/articles-db'
 
-export const metadata: Metadata = { title: 'News', description: 'Company and product updates from YIDIANYUAN. No articles have been published yet.' }
+export const metadata: Metadata = {
+  title: 'News',
+  description: 'Company and product updates from YIDIANYUAN. No articles have been published yet.',
+  alternates: { canonical: '/news' },
+  openGraph: { type: 'website', url: '/news', images: ['/images/banner-1.jpg'] },
+}
 
 export const revalidate = 60
 
