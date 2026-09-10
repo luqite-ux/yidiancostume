@@ -41,7 +41,7 @@ export function ManufacturingFactsSection() {
 
         <motion.div initial={false} whileHover={reduceMotion ? undefined : { scale: 1.012 }} transition={{ duration: 0.3 }} className="relative h-72 overflow-hidden rounded-sm sm:h-96 lg:h-full lg:min-h-[420px]">
           <Image
-            src="/images/factory-latest.png"
+            src="/images/factory-latest-clean.png"
             alt="Sewing production floor at the Shantou Yidianyuan Garment Industry facility"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"

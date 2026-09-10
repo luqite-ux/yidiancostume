@@ -84,3 +84,11 @@ test('approved motion plan is represented by three component-level motion scenes
   assert.ok((sources.match(/motion\/react/g) ?? []).length >= 3)
   assert.doesNotMatch(sources, /initial=\{[^\n]*opacity:\s*0/)
 })
+
+test('category cards keep product imagery unobscured by separating image and copy', () => {
+  const source = readFileSync(new URL('components/home/category-grid.tsx', root), 'utf8')
+  assert.doesNotMatch(source, /bg-gradient-to-t/)
+  assert.match(source, /data-category-image/)
+  assert.match(source, /object-contain/)
+  assert.match(source, /data-category-content/)
+})

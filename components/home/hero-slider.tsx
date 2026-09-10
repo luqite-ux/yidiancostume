@@ -56,7 +56,7 @@ const slides: Slide[] = [
   },
   {
     id: 'manufacturing',
-    image: '/images/factory-latest.png',
+    image: '/images/factory-latest-clean.png',
     imagePositionMobile: 'center 40%',
     imagePositionDesktop: 'center 45%',
     contentPositionMobile: 'items-start justify-end pb-28',

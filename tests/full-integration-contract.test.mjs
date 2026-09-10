@@ -25,10 +25,12 @@ test('product detail exposes the complete backend gallery without cropping produ
 
 test('manufacturing page uses every qualified client-supplied facility photograph', () => {
   const page = read('app/manufacturing/page.tsx')
-  for (const image of ['factory-latest.png', 'warehouse.png', 'sewing-line.png', 'finishing-area.png']) {
+  for (const image of ['factory-latest-clean.png', 'warehouse-clean.png', 'sewing-line-clean.png', 'finishing-area-clean.png']) {
     assert.equal(existsSync(new URL(`public/images/${image}`, root)), true, `missing ${image}`)
     assert.match(page, new RegExp(image.replace('.', '\\.')))
   }
+  assert.match(read('components/home/manufacturing-facts-section.tsx'), /factory-latest-clean\.png/)
+  assert.match(read('components/home/hero-slider.tsx'), /factory-latest-clean\.png/)
 })
 
 test('inquiry CAPTCHA is consumed before the inquiry insert', () => {

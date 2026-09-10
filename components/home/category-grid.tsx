@@ -29,15 +29,16 @@ export function CategoryGrid({ categories }: { categories: ProductCategory[] }) 
               initial={false}
               whileHover={reduceMotion ? undefined : { y: -6 }}
               transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-              className="h-96"
+              className="h-full"
             >
-              <Link href={`/products?category=${category.slug}`} className="group relative flex h-full flex-col overflow-hidden rounded-sm border border-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
-                <Image src={category.heroImage} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
-                <div className="relative mt-auto flex flex-col gap-2 p-6 text-primary-foreground">
+              <Link href={`/products?category=${category.slug}`} className="group flex h-full flex-col overflow-hidden rounded-sm border border-border bg-card shadow-[0_14px_40px_rgba(30,74,52,0.08)] transition-shadow hover:shadow-[0_18px_48px_rgba(30,74,52,0.14)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+                <div data-category-image className="relative aspect-[4/3] overflow-hidden bg-[#f2f0e8]">
+                  <Image src={category.heroImage} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-contain object-center" />
+                </div>
+                <div data-category-content className="flex flex-1 flex-col gap-2 border-t border-border bg-card p-6 text-foreground">
                   <h3 className="font-serif text-xl">{getLocalized(category.name)}</h3>
-                  <p className="text-sm leading-relaxed text-primary-foreground/85">{getLocalized(category.shortDescription)}</p>
-                  <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[#f2c979]">View products <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{getLocalized(category.shortDescription)}</p>
+                  <span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-semibold text-[#7a521b]">View products <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
                 </div>
               </Link>
             </motion.div>
