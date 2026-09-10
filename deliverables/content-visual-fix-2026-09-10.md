@@ -45,8 +45,24 @@ Local Production browser console result: 0 errors. The two observed warnings are
 
 ## Local verification
 
-- Visual contract tests: 15/15 PASS.
+- Full automated test suite: 18/18 PASS.
 - TypeScript: PASS.
 - Next.js Production build: PASS.
 - Taste outcome: PASS for the requested surfaces at desktop and 390px.
 
+## Formal Production verification
+
+- Visual correction commit: `63286e5dabd7a591bee9ba94f82263f424160579`.
+- Visual Production deployment: `dpl_3uS1CHYsNKoXucerKBLAmi8gTie1`, state `READY`.
+- Follow-up static-page canonical correction commit: `6fd08304211d8e7d96fa7026dd188fe90b3ccaf9`.
+- Canonical correction Production deployment: `dpl_EeDo1fLbieKZ7XbbZEtPWiLXZP4o`, state `READY`.
+- Formal routes `/` and `/manufacturing`: HTTP 200.
+- All four adopted clean image assets: HTTP 200.
+- Formal HTML uses all four clean assets and does not contain the removed category gradient class.
+- Formal desktop category evidence: `output/playwright/formal-visual-fix-categories-desktop.png`.
+- Formal 390px category evidence: `output/playwright/formal-visual-fix-categories-mobile-390.png`.
+- Formal desktop manufacturing evidence: `output/playwright/formal-visual-fix-manufacturing-desktop.png`.
+- Formal 390px manufacturing evidence: `output/playwright/formal-visual-fix-manufacturing-mobile-390.png`.
+- Formal browser console: 0 errors and 0 warnings on the final screenshot pass.
+
+The first valid Lighthouse manufacturing-page report scored Performance 96, Accessibility 100 and Best Practices 100. Its only SEO failure was an inherited homepage canonical on the manufacturing route. That pre-existing defect was corrected for `/about`, `/contact`, `/faq`, `/manufacturing`, `/news`, `/oem-odm` and `/products`; each route was then read back from the formal domain with an HTTP 200, its own canonical URL and matching Open Graph URL. A subsequent Lighthouse CLI attempt produced no usable audit because Windows denied cleanup of the tool's temporary directory, so no score is claimed from that empty report.
