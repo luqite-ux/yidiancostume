@@ -3,6 +3,7 @@ const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL?.trim().replace(/[\r\n]/g, ''
 
 const nextConfig = {
   images: {
+    qualities: [92],
     remotePatterns: [
       { protocol: 'https', hostname: 'pub-c7a22068052144a5805830c30d280128.r2.dev' },
     ],

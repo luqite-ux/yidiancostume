@@ -52,15 +52,20 @@ test('hero stores a distinct copy position for every supplied banner', () => {
   assert.equal((source.match(/contentPositionMobile:/g) ?? []).length, 4)
 })
 
-test('hero uses the three replacement client banners in the supplied order without gradients', () => {
+test('hero leads with the porch-goose banner, uses HD assets, and avoids gradients', () => {
   const source = readFileSync(new URL('components/home/hero-slider.tsx', root), 'utf8')
-  const stageCollection = source.indexOf("image: '/images/banner-stage-collection.jpg'")
-  const princessCollection = source.indexOf("image: '/images/banner-princess-pet.jpg'")
-  const gooseCollection = source.indexOf("image: '/images/banner-goose-catalog.jpg'")
+  const nextConfig = readFileSync(new URL('next.config.mjs', root), 'utf8')
+  const gooseCollection = source.indexOf("image: '/images/banner-goose-catalog-hd.png'")
+  const stageCollection = source.indexOf("image: '/images/banner-stage-collection-hd.png'")
+  const princessCollection = source.indexOf("image: '/images/banner-princess-pet-hd.png'")
 
-  assert.ok(stageCollection >= 0, 'missing stage-costume collection banner')
-  assert.ok(princessCollection > stageCollection, 'princess and pet banner must be second')
-  assert.ok(gooseCollection > princessCollection, 'porch-goose catalog banner must be third')
+  assert.ok(gooseCollection >= 0, 'porch-goose catalog banner must be first')
+  assert.ok(stageCollection > gooseCollection, 'stage-costume collection banner must be second')
+  assert.ok(princessCollection > stageCollection, 'princess and pet banner must be third')
+  assert.match(source, /desktopCopyClassName: 'sm:max-w-md/)
+  assert.match(source, /sizes="100vw"/)
+  assert.match(source, /quality=\{92\}/)
+  assert.match(nextConfig, /qualities:\s*\[92\]/)
   assert.doesNotMatch(source, /bg-gradient-/)
   assert.doesNotMatch(source, /backdrop-blur/)
   assert.doesNotMatch(source, /imageNote/)

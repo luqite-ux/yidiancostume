@@ -29,8 +29,26 @@ interface Slide {
 
 const slides: Slide[] = [
   {
+    id: 'porch-goose-catalog',
+    image: '/images/banner-goose-catalog-hd.png',
+    imagePositionMobile: '47% center',
+    imagePositionDesktop: 'center center',
+    contentPositionMobile: 'items-start justify-end pb-28',
+    contentPositionDesktop: 'sm:items-start sm:justify-center sm:pb-0',
+    textAlignmentDesktop: 'sm:text-left',
+    desktopCopyClassName: 'sm:max-w-md sm:rounded-2xl sm:bg-primary sm:p-7 sm:text-primary-foreground',
+    desktopHeadingClassName: 'sm:text-primary-foreground',
+    desktopEyebrowClassName: 'sm:text-primary-foreground',
+    desktopBodyClassName: 'sm:text-primary-foreground/80',
+    eyebrow: 'Porch goose outfit collections',
+    heading: 'Seasonal character for every doorstep display',
+    body: 'Create coordinated porch goose outfits for holiday, wedding, and occasion themes with customizable fabrics, sizing, and decorative details.',
+    primaryCta: { label: 'Explore Goose Outfits', href: '/products?category=porch-goose-outfits' },
+    secondaryCta: { label: 'Request a Quote', href: '/contact' },
+  },
+  {
     id: 'stage-costume-collection',
-    image: '/images/banner-stage-collection.jpg',
+    image: '/images/banner-stage-collection-hd.png',
     imagePositionMobile: '62% center',
     imagePositionDesktop: 'center center',
     contentPositionMobile: 'items-start justify-end pb-28',
@@ -47,7 +65,7 @@ const slides: Slide[] = [
   },
   {
     id: 'princess-and-pet-apparel',
-    image: '/images/banner-princess-pet.jpg',
+    image: '/images/banner-princess-pet-hd.png',
     imagePositionMobile: '34% center',
     imagePositionDesktop: 'center center',
     contentPositionMobile: 'items-start justify-end pb-28',
@@ -57,24 +75,6 @@ const slides: Slide[] = [
     heading: 'Princess styles developed across size and product lines',
     body: 'Bring a consistent color and decoration direction to stage costumes, children’s styles, and complementary pet apparel through OEM/ODM development.',
     primaryCta: { label: 'Explore Products', href: '/products' },
-    secondaryCta: { label: 'Request a Quote', href: '/contact' },
-  },
-  {
-    id: 'porch-goose-catalog',
-    image: '/images/banner-goose-catalog.jpg',
-    imagePositionMobile: '47% center',
-    imagePositionDesktop: 'center center',
-    contentPositionMobile: 'items-start justify-end pb-28',
-    contentPositionDesktop: 'sm:items-start sm:justify-center sm:pb-0',
-    textAlignmentDesktop: 'sm:text-left',
-    desktopCopyClassName: 'sm:rounded-2xl sm:bg-primary sm:p-8 sm:text-primary-foreground',
-    desktopHeadingClassName: 'sm:text-primary-foreground',
-    desktopEyebrowClassName: 'sm:text-primary-foreground',
-    desktopBodyClassName: 'sm:text-primary-foreground/80',
-    eyebrow: 'Porch goose outfit collections',
-    heading: 'Seasonal character for every doorstep display',
-    body: 'Create coordinated porch goose outfits for holiday, wedding, and occasion themes with customizable fabrics, sizing, and decorative details.',
-    primaryCta: { label: 'Explore Goose Outfits', href: '/products?category=porch-goose-outfits' },
     secondaryCta: { label: 'Request a Quote', href: '/contact' },
   },
 ]
@@ -145,6 +145,8 @@ export function HeroSlider() {
               alt=""
               fill
               priority={i === 0}
+              sizes="100vw"
+              quality={92}
               className="object-contain [object-position:var(--pos-mobile)] sm:object-cover sm:[object-position:var(--pos-desktop)]"
               style={
                 {
