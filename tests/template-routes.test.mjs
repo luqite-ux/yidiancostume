@@ -52,11 +52,42 @@ test('hero stores a distinct copy position for every supplied banner', () => {
   assert.equal((source.match(/contentPositionMobile:/g) ?? []).length, 4)
 })
 
+test('hero leads with the promoted goose outfits and uses the three client banners without gradients', () => {
+  const source = readFileSync(new URL('components/home/hero-slider.tsx', root), 'utf8')
+  const promoted = source.indexOf("image: '/images/banner-goose-outfits.jpg'")
+  const manufacturing = source.indexOf("image: '/images/banner-3.jpg'")
+  const stage = source.indexOf("image: '/images/banner-2.jpg'")
+
+  assert.ok(promoted >= 0, 'missing promoted porch-goose banner')
+  assert.ok(manufacturing > promoted, 'manufacturing banner must follow promoted porch-goose banner')
+  assert.ok(stage > manufacturing, 'stage-costume banner must be the third slide')
+  assert.doesNotMatch(source, /bg-gradient-/)
+  assert.doesNotMatch(source, /backdrop-blur/)
+  assert.doesNotMatch(source, /imageNote/)
+})
+
+test('mobile hero separates the client banner from an opaque copy panel and clips reveal overflow', () => {
+  const hero = readFileSync(new URL('components/home/hero-slider.tsx', root), 'utf8')
+  const layout = readFileSync(new URL('app/layout.tsx', root), 'utf8')
+
+  assert.match(hero, /h-\[220px\].*sm:inset-0.*sm:h-auto/)
+  assert.match(hero, /pt-\[220px\]/)
+  assert.match(hero, /bg-background p-5/)
+  assert.doesNotMatch(hero, /bg-background\/95/)
+  assert.match(layout, /overflow-x-clip/)
+})
+
 test('hero keeps exactly one semantic page heading as slides change', () => {
   const source = readFileSync(new URL('components/home/hero-slider.tsx', root), 'utf8')
   assert.match(source, /const Heading = i === index \? 'h1' : 'h2'/)
   assert.match(source, /<Heading/)
   assert.doesNotMatch(source, /<h1 className=/)
+})
+
+test('hero reads reduced-motion preference without an effect-driven state update', () => {
+  const source = readFileSync(new URL('components/home/hero-slider.tsx', root), 'utf8')
+  assert.match(source, /useReducedMotion/)
+  assert.doesNotMatch(source, /setReducedMotion/)
 })
 
 test('hero removes inactive slides from focus order and gives slide tabs usable touch targets', () => {
