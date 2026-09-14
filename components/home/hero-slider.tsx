@@ -16,6 +16,10 @@ interface Slide {
   contentPositionMobile: string
   contentPositionDesktop: string
   textAlignmentDesktop: string
+  desktopCopyClassName?: string
+  desktopHeadingClassName?: string
+  desktopEyebrowClassName?: string
+  desktopBodyClassName?: string
   eyebrow: string
   heading: string
   body: string
@@ -25,45 +29,52 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    id: 'porch-goose-outfits',
-    image: '/images/banner-goose-outfits.jpg',
-    imagePositionMobile: '32% center',
-    imagePositionDesktop: 'center center',
-    contentPositionMobile: 'items-start justify-end pb-28',
-    contentPositionDesktop: 'sm:items-end sm:justify-center sm:pb-0',
-    textAlignmentDesktop: 'sm:text-left',
-    eyebrow: 'Featured porch goose outfits',
-    heading: 'Seasonal looks made for standout displays',
-    body: 'Build a coordinated porch goose collection across holiday, wedding, and occasion themes, with OEM/ODM support for fabrics, sizing, and decorative details.',
-    primaryCta: { label: 'Explore Goose Outfits', href: '/products?category=porch-goose-outfits' },
-    secondaryCta: { label: 'Request a Quote', href: '/contact' },
-  },
-  {
-    id: 'manufacturing',
-    image: '/images/banner-3.jpg',
-    imagePositionMobile: '72% center',
+    id: 'stage-costume-collection',
+    image: '/images/banner-stage-collection.jpg',
+    imagePositionMobile: '62% center',
     imagePositionDesktop: 'center center',
     contentPositionMobile: 'items-start justify-end pb-28',
     contentPositionDesktop: 'sm:items-start sm:justify-center sm:pb-0',
     textAlignmentDesktop: 'sm:text-left',
-    eyebrow: 'Manufacturing',
-    heading: 'Documented production, inspected at every stage',
-    body: 'Two workshops and five sewing lines run incoming fabric checks, in-process inspection, and finished-product inspection ahead of a typical 12–15 day lead time.',
-    primaryCta: { label: 'View Manufacturing', href: '/manufacturing' },
+    desktopHeadingClassName: 'sm:text-white',
+    desktopEyebrowClassName: 'sm:text-white',
+    desktopBodyClassName: 'sm:text-white/80',
+    eyebrow: 'Stage costume collections',
+    heading: 'Distinctive looks shaped for the spotlight',
+    body: 'Develop coordinated stage and performance costume programs with confirmed materials, sizing, decoration, and sampling before bulk production.',
+    primaryCta: { label: 'Explore Stage Costumes', href: '/products?category=stage-costumes' },
     secondaryCta: { label: 'Request a Quote', href: '/contact' },
   },
   {
-    id: 'stage-costumes',
-    image: '/images/banner-2.jpg',
-    imagePositionMobile: '25% center',
+    id: 'princess-and-pet-apparel',
+    image: '/images/banner-princess-pet.jpg',
+    imagePositionMobile: '34% center',
     imagePositionDesktop: 'center center',
     contentPositionMobile: 'items-start justify-end pb-28',
     contentPositionDesktop: 'sm:items-end sm:justify-center sm:pb-0',
     textAlignmentDesktop: 'sm:text-left',
-    eyebrow: 'Stage costume development',
-    heading: 'From reference image to confirmed sample',
-    body: 'Send your design reference, sizing, and quantity, and our team develops a sample for your review before bulk production begins on our sewing lines.',
-    primaryCta: { label: 'See OEM/ODM Process', href: '/oem-odm' },
+    eyebrow: 'Coordinated apparel programs',
+    heading: 'Princess styles developed across size and product lines',
+    body: 'Bring a consistent color and decoration direction to stage costumes, children’s styles, and complementary pet apparel through OEM/ODM development.',
+    primaryCta: { label: 'Explore Products', href: '/products' },
+    secondaryCta: { label: 'Request a Quote', href: '/contact' },
+  },
+  {
+    id: 'porch-goose-catalog',
+    image: '/images/banner-goose-catalog.jpg',
+    imagePositionMobile: '47% center',
+    imagePositionDesktop: 'center center',
+    contentPositionMobile: 'items-start justify-end pb-28',
+    contentPositionDesktop: 'sm:items-start sm:justify-center sm:pb-0',
+    textAlignmentDesktop: 'sm:text-left',
+    desktopCopyClassName: 'sm:rounded-2xl sm:bg-primary sm:p-8 sm:text-primary-foreground',
+    desktopHeadingClassName: 'sm:text-primary-foreground',
+    desktopEyebrowClassName: 'sm:text-primary-foreground',
+    desktopBodyClassName: 'sm:text-primary-foreground/80',
+    eyebrow: 'Porch goose outfit collections',
+    heading: 'Seasonal character for every doorstep display',
+    body: 'Create coordinated porch goose outfits for holiday, wedding, and occasion themes with customizable fabrics, sizing, and decorative details.',
+    primaryCta: { label: 'Explore Goose Outfits', href: '/products?category=porch-goose-outfits' },
     secondaryCta: { label: 'Request a Quote', href: '/contact' },
   },
 ]
@@ -148,15 +159,19 @@ export function HeroSlider() {
               initial={false}
               animate={reducedMotion ? { opacity: 1, y: 0 } : i === index ? { opacity: 1, y: 0 } : { opacity: 0.9, y: 0 }}
               transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
-              className={cn('w-full bg-background p-5 text-foreground sm:max-w-xl sm:bg-transparent sm:p-0', slide.textAlignmentDesktop)}
+              className={cn(
+                'w-full bg-background p-5 text-foreground sm:max-w-xl sm:bg-transparent sm:p-0',
+                slide.textAlignmentDesktop,
+                slide.desktopCopyClassName,
+              )}
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              <p className={cn('text-xs font-semibold uppercase tracking-[0.2em] text-primary', slide.desktopEyebrowClassName)}>
                 {slide.eyebrow}
               </p>
-              <Heading className="mt-3 font-serif text-2xl leading-tight text-balance sm:text-4xl lg:text-5xl">
+              <Heading className={cn('mt-3 font-serif text-2xl leading-tight text-balance sm:text-4xl lg:text-5xl', slide.desktopHeadingClassName)}>
                 {slide.heading}
               </Heading>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <p className={cn('mt-4 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base', slide.desktopBodyClassName)}>
                 {slide.body}
               </p>
               <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">

@@ -30,7 +30,6 @@ test('manufacturing page uses every qualified client-supplied facility photograp
     assert.match(page, new RegExp(image.replace('.', '\\.')))
   }
   assert.match(read('components/home/manufacturing-facts-section.tsx'), /factory-latest-clean\.png/)
-  assert.match(read('components/home/hero-slider.tsx'), /banner-3\.jpg/)
 })
 
 test('inquiry CAPTCHA is consumed before the inquiry insert', () => {

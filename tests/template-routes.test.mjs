@@ -52,15 +52,15 @@ test('hero stores a distinct copy position for every supplied banner', () => {
   assert.equal((source.match(/contentPositionMobile:/g) ?? []).length, 4)
 })
 
-test('hero leads with the promoted goose outfits and uses the three client banners without gradients', () => {
+test('hero uses the three replacement client banners in the supplied order without gradients', () => {
   const source = readFileSync(new URL('components/home/hero-slider.tsx', root), 'utf8')
-  const promoted = source.indexOf("image: '/images/banner-goose-outfits.jpg'")
-  const manufacturing = source.indexOf("image: '/images/banner-3.jpg'")
-  const stage = source.indexOf("image: '/images/banner-2.jpg'")
+  const stageCollection = source.indexOf("image: '/images/banner-stage-collection.jpg'")
+  const princessCollection = source.indexOf("image: '/images/banner-princess-pet.jpg'")
+  const gooseCollection = source.indexOf("image: '/images/banner-goose-catalog.jpg'")
 
-  assert.ok(promoted >= 0, 'missing promoted porch-goose banner')
-  assert.ok(manufacturing > promoted, 'manufacturing banner must follow promoted porch-goose banner')
-  assert.ok(stage > manufacturing, 'stage-costume banner must be the third slide')
+  assert.ok(stageCollection >= 0, 'missing stage-costume collection banner')
+  assert.ok(princessCollection > stageCollection, 'princess and pet banner must be second')
+  assert.ok(gooseCollection > princessCollection, 'porch-goose catalog banner must be third')
   assert.doesNotMatch(source, /bg-gradient-/)
   assert.doesNotMatch(source, /backdrop-blur/)
   assert.doesNotMatch(source, /imageNote/)
