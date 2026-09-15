@@ -37,6 +37,7 @@ export default function RootLayout({
         <script id="organization-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@graph': [{ '@type': 'Organization', '@id': 'https://yidiancostume.com/#organization', name: 'Shantou Yidianyuan Garment Industry Co., Ltd.', alternateName: 'YIDIANYUAN', url: 'https://yidiancostume.com', logo: 'https://yidiancostume.com/images/logo-transparent.png', email: 'info@yidiancostume.com', telephone: '+86 135 3120 2808', address: { '@type': 'PostalAddress', streetAddress: '5F, No. 142 Songshan Road', addressLocality: 'Shantou', addressRegion: 'Guangdong', addressCountry: 'CN' } }, { '@type': 'WebSite', '@id': 'https://yidiancostume.com/#website', url: 'https://yidiancostume.com', name: 'YIDIANYUAN', publisher: { '@id': 'https://yidiancostume.com/#organization' }, inLanguage: 'en' }] }) }} />
         {children}
         {process.env.VERCEL_ENV === 'production' && <Analytics />}
+      <script async src="https://admin.globle-trade.com/api/public/analytics.js?tenantId=ac8709c2-5781-4cac-99e2-2871a1489289" />
       </body>
     </html>
   )
